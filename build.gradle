@@ -1,0 +1,43 @@
+buildscript {
+    repositories {
+        maven { url "https://plugins.gradle.org/m2/" }
+    }
+    dependencies {
+        classpath "gradle.plugin.org.kt3k:ebean-enhance-plugin:2.0.5"
+    }
+}
+
+subprojects {
+    repositories {
+        mavenCentral()
+    }
+
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: "com.github.kt3k.ebean.enhance"
+    ebeanEnhance {
+        agentVersion = "4.9.2"
+    }
+
+    group 'ru.pokr'
+    version = '0.1'
+    compileJava.options.encoding = 'UTF-8'
+    compileTestJava.options.encoding = 'UTF-8'
+
+    tasks.withType(JavaCompile) {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+
+    test {
+        useTestNG()
+    }
+
+    dependencies {
+        compile "org.avaje.ebeanorm:avaje-ebeanorm:7.6.1"
+        compile "org.slf4j:slf4j-api:1.7.21"
+        compile "ch.qos.logback:logback-classic:1.1.7"
+        testCompile "org.testng:testng:6.9.10"
+        compileOnly "org.projectlombok:lombok:1.16.8"
+    }
+}
