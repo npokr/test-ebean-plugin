@@ -18,7 +18,8 @@ public class FourthTest {
             sb.append(": ");
             for (int i = 0; i < props.length; i++) {
                 sb.append(props[i]);
-                sb.append(", ");
+                if (i < props.length - 1)
+                    sb.append(", ");
             }
             log.info(sb.toString());
             clazz = clazz.getSuperclass();
